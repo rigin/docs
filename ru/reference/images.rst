@@ -1,34 +1,33 @@
-Images
-======
+Изображения
+===========
 
-:doc:`Phalcon\\Image <../api/Phalcon_Image>` is the component that allows you to manipulate image files.
-Multiple operations can be performed on the same image object.
+:doc:`Phalcon\\Image <../api/Phalcon_Image>` - это компонент, который позволяет вам манипулировать файлами изображений. Несколько операций могут выполняться над одним и тем же объектом изображения.
 
 .. highlights::
 
-    This guide is not intended to be a complete documentation of available methods and their arguments.
-    Please visit the :doc:`API <../api/index>` for a complete reference.
+    Это руководство не предназначено для полной документации о доступных методах и их аргументах. 
+    Пожалуйста, посетите :doc:`API <../api/index>` для получения полной справки.
 
-Adapters
+Адаптеры
 --------
-This component makes use of adapters to encapsulate specific image manipulator programs.
-The following image manipulator programs are supported:
+Этот компонент использует адаптеры для инкапсуляции определенных программ манипулятора изображения. 
+Поддерживаются следующие программы обработки изображений:
 
 +--------------------------------------------------------------------------------+--------------------------------------------+
-| Class                                                                          | Description                                |
+| Класс                                                                          | Описание                                   |
 +================================================================================+============================================+
-| :doc:`Phalcon\\Image\\Adapter\\Gd <../api/Phalcon_Image_Adapter_Gd>`           | Requires the `GD PHP extension`_.          |
+| :doc:`Phalcon\\Image\\Adapter\\Gd <../api/Phalcon_Image_Adapter_Gd>`           | Требует      `GD PHP extension`_.          |
 +--------------------------------------------------------------------------------+--------------------------------------------+
-| :doc:`Phalcon\\Image\\Adapter\\Imagick <../api/Phalcon_Image_Adapter_Imagick>` | Requires the `ImageMagick PHP extension`_. |
+| :doc:`Phalcon\\Image\\Adapter\\Imagick <../api/Phalcon_Image_Adapter_Imagick>` | Требует      `ImageMagick PHP extension`_. |
 +--------------------------------------------------------------------------------+--------------------------------------------+
 
-Implementing your own adapters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The :doc:`Phalcon\\Image\\AdapterInterface <../api/Phalcon_Image_AdapterInterface>` interface must be implemented in order to create your own image adapters or extend the existing ones.
+Реализация собственных адаптеров
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Для создания собственных графических адаптеров или расширения существующих интерфейсов должен быть реализован интерфейс :doc:`Phalcon\\Image\\AdapterInterface <../api/Phalcon_Image_AdapterInterface>`.
 
-Saving and rendering images
----------------------------
-Before we begin with the various features of the image component, it's worth understanding how to save and render these images.
+Сохранение и рендеринг изображений
+----------------------------------
+Прежде чем мы начнем с различных функций компонента изображения, стоит понять, как сохранять и отображать эти изображения.
 
 .. code-block:: php
 
@@ -38,7 +37,7 @@ Before we begin with the various features of the image component, it's worth und
 
     // ...
 
-    // Overwrite the original image
+    // Перезаписать исходное изображение
     $image->save();
 
 .. code-block:: php
@@ -49,10 +48,10 @@ Before we begin with the various features of the image component, it's worth und
 
     // ...
 
-    // Save to 'new-image.jpg'
+    // Сохранить 'new-image.jpg'
     $image->save("new-image.jpg");
 
-You can also change the format of the image:
+Вы также можете изменить формат изображения:
 
 .. code-block:: php
 
@@ -62,10 +61,10 @@ You can also change the format of the image:
 
     // ...
 
-    // Save as a PNG file
+    // Сохранить как файл PNG
     $image->save("image.png");
 
-When saving as a JPEG, you can also specify the quality as the second parameter:
+При сохранении в формате JPEG вы также можете указать качество как второй параметр:
 
 .. code-block:: php
 
@@ -75,12 +74,12 @@ When saving as a JPEG, you can also specify the quality as the second parameter:
 
     // ...
 
-    // Save as a JPEG with 80% quality
+    // Сохранить как JPEG с качеством 80%
     $image->save("image.jpg", 80);
 
-Resizing images
----------------
-There are several modes of resizing:
+Изменение размеров изображений
+------------------------------
+Существует несколько способов изменения размера:
 
 - :code:`\Phalcon\Image::WIDTH`
 - :code:`\Phalcon\Image::HEIGHT`
@@ -92,7 +91,8 @@ There are several modes of resizing:
 
 :code:`\Phalcon\Image::WIDTH`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The height will automatically be generated to keep the proportions the same; if you specify a height, it will be ignored.
+Высота будет генерироваться автоматически, чтобы сохранить пропорции одинаковыми; 
+Если вы укажете высоту, она будет проигнорирована.
 
 .. code-block:: php
 
@@ -110,7 +110,8 @@ The height will automatically be generated to keep the proportions the same; if 
 
 :code:`\Phalcon\Image::HEIGHT`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The width will automatically be generated to keep the proportions the same; if you specify a width, it will be ignored.
+Ширина будет генерироваться автоматически, чтобы сохранить пропорции одинаковыми; 
+Если вы укажете ширину, она будет проигнорирована.
 
 .. code-block:: php
 
@@ -128,10 +129,7 @@ The width will automatically be generated to keep the proportions the same; if y
 
 :code:`\Phalcon\Image::NONE`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The :code:`NONE` constant ignores the original image's ratio.
-Neither width and height are required.
-If a dimension is not specified, the original dimension will be used.
-If the new proportions differ from the original proportions, the image may be distorted and stretched.
+Константа :code:`NONE` игнорирует соотношение исходного изображения. Ширина и высота не требуются. Если размер не указан, будет использовано исходное измерение. Если новые пропорции отличаются от исходных пропорций, изображение может быть искажено и растянуто.
 
 .. code-block:: php
 
@@ -149,9 +147,9 @@ If the new proportions differ from the original proportions, the image may be di
 
 :code:`\Phalcon\Image::TENSILE`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Similar to the :code:`NONE` constant, the :code:`TENSILE` constant ignores the original image's ratio.
-Both width and height are required.
-If the new proportions differ from the original proportions, the image may be distorted and stretched.
+Подобно константе :code:`NONE`, константа :code:`TENSILE` игнорирует соотношение исходного изображения. 
+Необходимо указать ширину и высоту. Если новые пропорции отличаются от исходных пропорций, 
+изображение может быть искажено и растянуто.
 
 .. code-block:: php
 
@@ -167,9 +165,9 @@ If the new proportions differ from the original proportions, the image may be di
 
     $image->save("resized-image.jpg");
 
-Cropping images
----------------
-For example, to get a 100px by 100px square from the centre of the image:
+Обрезание изображений
+---------------------
+Например, чтобы получить квадрат 100 пикселей на 100 пикселей от центра изображения:
 
 .. code-block:: php
 
@@ -186,8 +184,8 @@ For example, to get a 100px by 100px square from the centre of the image:
 
     $image->save("cropped-image.jpg");
 
-Rotating images
----------------
+Вращение изображений
+--------------------
 .. code-block:: php
 
     <?php
@@ -199,9 +197,9 @@ Rotating images
 
     $image->save("rotated-image.jpg");
 
-Flipping images
----------------
-You can flip an image horizontally (using the :code:`\Phalcon\Image::HORIZONTAL` constant) and vertically (using the :code:`\Phalcon\Image::VERTICAL` constant):
+Переворачивание изображений
+---------------------------
+Вы можете перевернуть изображение по горизонтали (используя константу :code:`\Phalcon\Image::HORIZONTAL`) и вертикально (используя константу :code:`Phalcon\Image::VERTICAL`):
 
 .. code-block:: php
 
@@ -216,9 +214,9 @@ You can flip an image horizontally (using the :code:`\Phalcon\Image::HORIZONTAL`
 
     $image->save("flipped-image.jpg");
 
-Sharpening images
------------------
-The :code:`sharpen()` method takes a single parameter - an integer between 0 (no effect) and 100 (very sharp):
+Увеличение резкозти изображений
+-------------------------------
+Метод :code:`sharpen()` принимает один параметр - целое число от 0 (без эффекта) до 100 (очень резкое):
 
 .. code-block:: php
 
@@ -230,8 +228,8 @@ The :code:`sharpen()` method takes a single parameter - an integer between 0 (no
 
     $image->save("sharpened-image.jpg");
 
-Adding watermarks to images
----------------------------
+Добавление водяных знаков к изображениям
+----------------------------------------
 
 .. code-block:: php
 
@@ -241,7 +239,7 @@ Adding watermarks to images
 
     $watermark = new \Phalcon\Image\Adapter\Gd("me.jpg");
 
-    // Put the watermark in the top left corner
+    // Поместите водяной знак в верхний левый угол
     $offsetX = 10;
     $offsetY = 10;
 
@@ -256,7 +254,7 @@ Adding watermarks to images
 
     $image->save("watermarked-image.jpg");
 
-Of course, you can also manipulate the watermarked image before applying it to the main image:
+Конечно, вы можете также манипулировать водяным знаком, прежде чем применить его к основному изображению:
 
 .. code-block:: php
 
@@ -270,7 +268,7 @@ Of course, you can also manipulate the watermarked image before applying it to t
     $watermark->rotate(90);
     $watermark->sharpen(5);
 
-    // Put the watermark in the bottom right corner with a 10px margin
+    // Поместите водяной знак в нижний правый угол с отступом 10 пикселей
     $offsetX = ($image->getWidth() - $watermark->getWidth() - 10);
     $offsetY = ($image->getHeight() - $watermark->getHeight() - 10);
 
@@ -285,9 +283,9 @@ Of course, you can also manipulate the watermarked image before applying it to t
 
     $image->save("watermarked-image.jpg");
 
-Blurring images
----------------
-The :code:`blur()` method takes a single parameter - an integer between 0 (no effect) and 100 (very blurry):
+Размытие изображений
+--------------------
+Метод :code:`blur()` принимает единственный параметр - целое число от 0 (без эффекта) до 100 (очень размытое):
 
 .. code-block:: php
 
@@ -299,9 +297,9 @@ The :code:`blur()` method takes a single parameter - an integer between 0 (no ef
 
     $image->save("blurred-image.jpg");
 
-Pixelating images
------------------
-The :code:`pixelate()` method takes a single parameter - the higher the integer, the more pixelated the image becomes:
+Пикселирование изображений
+--------------------------
+Метод :code:`pixelate()` принимает единственный параметр - чем выше целое число, тем больше пикселизация изображения становится:
 
 .. code-block:: php
 
